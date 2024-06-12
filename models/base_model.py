@@ -45,7 +45,7 @@ class BaseModel:
         keys/values of the instance.
         """
         d = self.__dict__
-        d['__class__ '] = __class__.__name__
+        d['__class__'] = __class__.__name__
         d['created_at'] = d['created_at'].isoformat()
         d['updated_at'] = d['updated_at'].isoformat()
         return d
