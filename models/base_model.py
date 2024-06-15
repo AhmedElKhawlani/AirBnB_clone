@@ -14,14 +14,21 @@ class BaseModel:
     attributes/methods for other classes.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Instance Initialization.
         """
 
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        if kwargs:
+            for key in kwargs:
+                if key in ('updated_at', 'created_at'):
+                    self.__dict__[key] = datetime.datetime.fromisoformat(kwargs[key])
+                elif key != '__class__':
+                    self.__dict__[key] = kwargs[key]
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
 
     def __str__(self):
         """
