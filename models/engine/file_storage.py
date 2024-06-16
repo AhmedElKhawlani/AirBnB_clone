@@ -5,6 +5,7 @@ This module defines the class FileStorage.
 """
 
 import json
+from ..base_model import BaseModel
 
 
 class FileStorage:
