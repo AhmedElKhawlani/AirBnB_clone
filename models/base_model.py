@@ -6,6 +6,7 @@ This module defines the class BaseModel.
 
 import uuid
 import datetime
+import models
 
 
 class BaseModel:
@@ -22,13 +23,15 @@ class BaseModel:
         if kwargs:
             for key in kwargs:
                 if key in ('updated_at', 'created_at'):
-                    self.__dict__[key] = datetime.datetime.fromisoformat(kwargs[key])
+                    iso = datetime.datetime.fromisoformat(kwargs[key])
+                    self.__dict__[key] = iso
                 elif key != '__class__':
                     self.__dict__[key] = kwargs[key]
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -45,6 +48,7 @@ class BaseModel:
         updated_at with the current datetime.
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
