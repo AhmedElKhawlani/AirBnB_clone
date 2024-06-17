@@ -52,7 +52,7 @@ class FileStorage:
             with open(self.__class__.__file_path, "r") as f:
                 dict_json = json.load(f)
             for key, value in dict_json.items():
-                obj = eval(value['__class__'])(**value)
+                obj = eval(key.split('.')[0])(**value)
                 self.new(obj)
-        except FileNotFoundError:
+        except Exception:
             pass

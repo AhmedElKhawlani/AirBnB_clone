@@ -21,9 +21,9 @@ class BaseModel:
         """
 
         if kwargs:
-            for key in kwargs:
+            for key, value in kwargs.items():
                 if key in ('updated_at', 'created_at'):
-                    iso = datetime.datetime.fromisoformat(kwargs[key])
+                    iso = datetime.datetime.fromisoformat(value)
                     self.__dict__[key] = iso
                 elif key != '__class__':
                     self.__dict__[key] = kwargs[key]
@@ -57,6 +57,8 @@ class BaseModel:
         """
         d = self.__dict__
         d['__class__'] = __class__.__name__
-        d['created_at'] = d['created_at'].isoformat()
-        d['updated_at'] = d['updated_at'].isoformat()
+        if not isinstance(self.created_at, str):
+            d['created_at'] = self.created_at.isoformat()
+        if not isinstance(self.updated_at, str):
+            d['updated_at'] = self.updated_at.isoformat()
         return d
