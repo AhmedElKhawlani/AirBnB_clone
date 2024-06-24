@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
         storage_dict = storage.all()
         key = acls.__name__ + "." + id
         if key not in storage_dict:
-            print("** instance id missing **")
+            print("** no instance found **")
             return
 
         if len(args) < 3:
