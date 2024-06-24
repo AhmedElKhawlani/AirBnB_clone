@@ -37,7 +37,7 @@ class BaseModel:
         """
         Defines a string representation for an instance.
         """
-        name = __class__.__name__
+        name = self.__class__.__name__
         sid = self.id
         d = str(self.__dict__)
         return "[" + name + "] " + "(" + sid + ") " + d
