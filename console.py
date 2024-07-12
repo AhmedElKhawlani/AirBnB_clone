@@ -217,10 +217,8 @@ class HBNBCommand(cmd.Cmd):
             arg = line[0]
             if do == 'show':
                 self.do_show(arg + " " + id)
-
-
-            
-
+            elif do == 'destroy':
+                self.do_destroy(arg + " " + id)
 
 
 if __name__ == '__main__':
