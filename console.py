@@ -207,12 +207,13 @@ class HBNBCommand(cmd.Cmd):
             self.do_all(line[:-6])
         elif line[-8:] == ".count()":
             self.do_count(line[:-8])
-        elif "." in line and line.count(".") == 1 and line[-1] == ')':
-            line = line.split()
+        elif "." in line and line.count(".") == 1:
+            line = line.split(".")
             command = line[-1]
             i = command.index('(')
+            j = command.index(')')
             do = command[:i]
-            id = command[i + 1:-1]
+            id = command[i + 1: j]
             arg = line[0]
             if do == 'show':
                 self.do_show(arg + " " + id)
