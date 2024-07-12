@@ -185,9 +185,28 @@ class HBNBCommand(cmd.Cmd):
         obj.__dict__[attr] = val
         storage.save()
 
+    def do_count(self, acls):
+        if acls:
+            try:
+                acls = eval(acls)
+            except NameError:
+                print("** class doesn't exist **")
+                return
+
+            storage_dict = storage.all()
+            counter = 0
+            for key in storage_dict:
+                if key[:len(acls.__name__)] == acls.__name__:
+                    counter += 1
+            print(counter)
+        else:
+            print(len(storage.all()))
+
     def default(self, line):
         if line[-6:] == ".all()":
             self.do_all(line[:-6])
+        elif line[-8:] == ".count()":
+            self.do_count(line[:-8])
 
 
 if __name__ == '__main__':
