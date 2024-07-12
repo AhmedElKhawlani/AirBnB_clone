@@ -10,7 +10,7 @@ from models.amenity import Amenity
 from models.city import City
 from models.place import Place
 from models.review import Review
-from models.state import State 
+from models.state import State
 from models.user import User
 from models import storage
 
@@ -184,6 +184,10 @@ class HBNBCommand(cmd.Cmd):
         obj = storage_dict[key]
         obj.__dict__[attr] = val
         storage.save()
+
+    def default(self, line):
+        if line[-6:] == ".all()":
+            self.do_all(line[:-6])
 
 
 if __name__ == '__main__':
