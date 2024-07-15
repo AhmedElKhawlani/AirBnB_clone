@@ -225,15 +225,6 @@ class HBNBCommand(cmd.Cmd):
                     splitted[i] = eval(splitted[i])
                 ide, name, val = splitted
                 self.do_update(arg + ' ' + ide + ' ' + name + ' ' + val)
-            elif do == 'update':
-                splitted = between.split(',')
-                for i in range(len(splitted)):
-                    splitted[i] = eval(splitted[i])
-                D = splitted[-1]
-                ide = splitted[0]
-                for key in D:
-                     li = arg + ' ' + ide + ' ' + str(key) + ' ' + str(D[key])
-                     self.do_update(li)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
