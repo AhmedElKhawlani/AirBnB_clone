@@ -230,6 +230,7 @@ class HBNBCommand(cmd.Cmd):
                 for i in range(len(splitted)):
                     splitted[i] = eval(splitted[i])
                 D = splitted[-1]
+                ide = splitted[0]
                 for key in D:
                      li = arg + ' ' + ide + ' ' + str(key) + ' ' + str(D[key])
                      self.do_update(li)
