@@ -213,12 +213,19 @@ class HBNBCommand(cmd.Cmd):
             i = command.index('(')
             j = command.index(')')
             do = command[:i]
-            id = command[i + 1: j]
+            between = command[i + 1: j]
             arg = line[0]
             if do == 'show':
-                self.do_show(arg + " " + id)
+                self.do_show(arg + " " + between)
             elif do == 'destroy':
-                self.do_destroy(arg + " " + id)
+                self.do_destroy(arg + " " + between)
+            elif do == 'update' and '{' not in between:
+                splitted = between.split(',')
+                for i in range(len(splitted) - 1):
+                    splitted[i] = eval(splitted[i])
+                ide, name, val = splitted
+                self.do_update(arg + ' ' + ide + ' ' + name + ' ' + val)
+
 
 
 if __name__ == '__main__':
